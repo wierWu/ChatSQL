@@ -1,12 +1,12 @@
 import os
 import re
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 import torch
 from transformers import AutoModel, AutoTokenizer
 import gradio as gr
 import mdtex2html
 import platform
-from transformers import AutoTokenizer, AutoModel
+# from transformers import AutoTokenizer, AutoModel
 from utility.utils import config_dict
 from utility.loggers import logger
 from sentence_transformers import util
@@ -81,7 +81,10 @@ def predict(input, chatbot, history):
     # for response, history in model.stream_chat(tokenizer, query, history, max_length=max_length, top_p=top_p,
     #                                            temperature=temperature):
     #     chatbot[-1] = (parse_text(input), parse_text(response))
-    response, history = model.chat(tokenizer, query, history=history, max_length=max_length, top_p=top_p,temperature=temperature)
+    # response, history = model.chat(tokenizer, query, history=history, max_length=max_length, top_p=top_p,temperature=temperature)
+    #禁止多轮对话
+    response, history = model.chat(tokenizer, query, [], max_length=max_length, top_p=top_p,temperature=temperature)
+
     chatbot[-1] = (parse_text(input), parse_text(response))
     # chatbot[-1] = (chatbot[-1][0], chatbot[-1][1])
     # 获取结果中的SQL语句
