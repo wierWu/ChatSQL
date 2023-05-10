@@ -16,7 +16,7 @@ from prompt import query_template, chatbot_prompt
 
 
 tokenizer = AutoTokenizer.from_pretrained("./ChatGlm-6b", trust_remote_code=True)
-model = AutoModel.from_pretrained("./ChatGlm-6b", trust_remote_code=True).half().cuda()
+model = AutoModel.from_pretrained("./ChatGlm-6b", trust_remote_code=True).quantize(8).half().cuda()
 model = model.eval()
 
 
